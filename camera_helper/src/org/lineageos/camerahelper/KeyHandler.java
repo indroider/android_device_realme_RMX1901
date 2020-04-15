@@ -46,7 +46,7 @@ public class KeyHandler implements DeviceKeyHandler {
         mContext = context;
     }
 
-    public KeyEvent handleKeyEvent(KeyEvent event) {
+    public boolean handleKeyEvent(KeyEvent event) {
         int scanCode = event.getScanCode();
 
         switch (scanCode) {
@@ -66,10 +66,10 @@ public class KeyHandler implements DeviceKeyHandler {
                 }
                 break;
             default:
-                return event;
+                return false;
         }
 
-        return null;
+        return true;
     }
 
     private Context getPackageContext() {
@@ -78,7 +78,7 @@ public class KeyHandler implements DeviceKeyHandler {
         } catch (NameNotFoundException | SecurityException e) {
             Log.e(TAG, "Failed to create package context", e);
         }
-        return null;
+        return true;
     }
 
     private void showCameraMotorCannotGoDownWarning() {
